@@ -1,0 +1,22 @@
+.gifContainer {
+    overflow-y: scroll;
+    min-height: 100%;
+    height: 100%;
+    position: fixed;
+    background: blue;
+}
+
+.addBtnForm {
+    float: right;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.gifDiv {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.gifDiv:last-child {
+    margin-bottom: 40px;
+}
