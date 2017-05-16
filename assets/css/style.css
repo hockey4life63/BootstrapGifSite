@@ -6,17 +6,57 @@
     background: blue;
 }
 
+.gifContainer h1 {
+    font-family: 'Alfa Slab One', cursive;
+    text-align: center;
+}
+
 .addBtnForm {
-    float: right;
     margin-right: 20px;
     padding: 20px;
 }
 
 .gifDiv {
     display: inline-block;
-    margin: 0 10px;
+    margin: 10px 40px;
 }
 
 .gifDiv:last-child {
     margin-bottom: 40px;
+}
+
+.firstDiv {
+    width: 200px;
+    height: 200px;
+    margin: 0 0 30px;
+    perspective: 1000px;
+}
+
+.firstDiv div {
+    height: 100%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: .5s;
+}
+
+.rot {
+    transform: rotateX(-90deg);
+}
+
+img {
+    position: absolute;
+}
+
+img:first-child {
+    transform: translate3d(0, 0, 100px);
+}
+
+img:last-child {
+    bottom: 100px;
+    transform: rotateX(90deg);
+}
+
+li {
+    font-family: 'Russo One', sans-serif;
+    font-size: 17px;
 }

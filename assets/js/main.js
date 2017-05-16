@@ -2,8 +2,8 @@ let gifObj = {
     apiKey: "api_key=dc6zaTOxFJmzC",
     url: "https://api.giphy.com/v1/gifs/search?",
     limit: "limit=10&",
-    topics: ["Breaking Bad", "Curb Your Enthusiasm", "West Wing", "Longmire", "The x-Files",
-        "SNL", "WestWorld", "Better Call Saul", "Archer", "The Office"
+    topics: ["Breaking Bad", "Curb Your Enthusiasm", "West Wing", "Longmire",
+        "The X-Files", "SNL", "WestWorld", "Better Call Saul", "Archer", "The Office"
     ],
     apiCall: function(query) {
         let search = "q=" + query + "&";
@@ -15,12 +15,15 @@ let gifObj = {
             for (var i = 0; i < response.data.length; i++) {
                 gifObj.buildGif(query, response.data[i]);
             }
-            gifObj.addGifLisnter();
+            $(".firstDiv").on("click", function() {
+                $(this).children().eq(0).toggleClass("rot")
+            })
 
         })
 
     },
     addButton: function(name) {
+
         this.topics.push(name);
         this.buildButtons();
         let nameID = "#" + name.replace(/ /g, "-");
@@ -79,23 +82,50 @@ let gifObj = {
         let rating = $("<p>");
         rating.text("Rating: " + gif.rating);
         rating.addClass("rating");
-        let img = $("<img>");
-        img.addClass("gifDisplay");
-        img.attr("data-still", gif.images.fixed_height_still.url);
-        img.attr("data-animated", gif.images.fixed_height.url);
-        img.attr("state", "still");
-        img.attr("src", gif.images.fixed_height_still.url);
-        item.append(img);
+        let mainDiv = $("<div>").addClass("firstDiv").css({ "width": gif.images.fixed_height.width });
+        let innerDiv = $("<div>");
+        innerDiv.append($("<img>").attr("src", gif.images.fixed_height_still.url));
+        innerDiv.append($("<img>").attr("src", gif.images.fixed_height.url));
+        // let img = $("<img>");
+        // img.addClass("gifDisplay");
+        // img.attr("data-still", gif.images.fixed_height_still.url);
+        // img.attr("data-animated", gif.images.fixed_height.url);
+        // img.attr("state", "still");
+        // img.attr("src", gif.images.fixed_height_still.url);
+        // item.append(img);
+        mainDiv.append(innerDiv);
+        item.append(mainDiv);
         item.append(rating);
         let locID = "#" + loc.replace(/ /g, "-")
         $(locID).append(item);
+    },
+    cap: function(word) {
+        let newWord = "";
+        let wasSpace = false;
+        let test = word.trim();
+        for (var i = 0; i < test.length; i++) {
+            if (i === 0) {
+                newWord += test[i].toUpperCase();
+            } else if (wasSpace && test[i] !== " ") {
+                newWord += test[i].toUpperCase();
+                wasSpace = false;
+            } else if (test[i] === " " && wasSpace !== true) {
+                wasSpace = true;
+                newWord += " ";
+            } else if (wasSpace !== true) {
+                newWord += test[i];
+            }
+        }
+        return newWord;
     }
 }
 $("#addTV").on("click", function() {
     let name = $("#TVinput").val();
     if (name !== "") {
-        gifObj.addButton(name);
-        $("#TVinput").val("");
+        gifObj.addButton(gifObj.cap(name));
     }
+    $("#TVinput").val("");
 });
 gifObj.buildButtons();
+$('.nav-tabs a[href="#' + gifObj.topics[0].replace(/ /g, "-") + '"]').tab('show').attr("called", "true");
+gifObj.apiCall(gifObj.topics[0]);
