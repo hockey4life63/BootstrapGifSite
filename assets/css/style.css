@@ -1,3 +1,7 @@
+body {
+    background-color: #575757;
+}
+
 .gifContainer {
     overflow-y: scroll;
     min-height: 100%;
@@ -14,6 +18,7 @@
 .addBtnForm {
     margin-right: 20px;
     padding: 20px;
+    color: white;
 }
 
 .gifDiv {
@@ -22,7 +27,7 @@
 }
 
 .gifDiv:last-child {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .firstDiv {
@@ -54,6 +59,11 @@ img:first-child {
 img:last-child {
     bottom: 100px;
     transform: rotateX(90deg);
+}
+
+.rating {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 20px;
 }
 
 li {

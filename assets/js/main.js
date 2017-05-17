@@ -86,13 +86,6 @@ let gifObj = {
         let innerDiv = $("<div>");
         innerDiv.append($("<img>").attr("src", gif.images.fixed_height_still.url));
         innerDiv.append($("<img>").attr("src", gif.images.fixed_height.url));
-        // let img = $("<img>");
-        // img.addClass("gifDisplay");
-        // img.attr("data-still", gif.images.fixed_height_still.url);
-        // img.attr("data-animated", gif.images.fixed_height.url);
-        // img.attr("state", "still");
-        // img.attr("src", gif.images.fixed_height_still.url);
-        // item.append(img);
         mainDiv.append(innerDiv);
         item.append(mainDiv);
         item.append(rating);
@@ -113,7 +106,7 @@ let gifObj = {
                 wasSpace = true;
                 newWord += " ";
             } else if (wasSpace !== true) {
-                newWord += test[i];
+                newWord += test[i].toLowerCase();
             }
         }
         return newWord;
